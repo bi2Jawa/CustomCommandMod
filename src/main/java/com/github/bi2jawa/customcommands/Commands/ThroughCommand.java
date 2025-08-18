@@ -57,7 +57,7 @@ public class ThroughCommand extends TpCommandBase {
             double[] pos = incrementAxis(posX, posZ, axisX, lookX, lookZ);
             posX = pos[0];
             posZ = pos[1];
-            if (isAirGap(posX, posY - 1, posZ, world)) {
+            if (!isSolid(posX, posY, posZ, world)) {
                 if (axisX) {
                     posX = Math.floor(posX);
                     posX = posX + 0.5;
