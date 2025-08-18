@@ -42,6 +42,7 @@ public class DownCommand extends TpCommandBase{
         for (int i = posY - 2; i >= 0; i--) {
             if (validBlock(posX, i, posZ, world)) {
                 tp(posX, i+1, posZ, player);
+                player.addChatMessage(new ChatComponentText("§cTeleported down"));
                 sent = true;
                 break;
             }
