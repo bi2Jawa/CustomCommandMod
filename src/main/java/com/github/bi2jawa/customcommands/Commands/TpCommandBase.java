@@ -21,34 +21,29 @@ public abstract class TpCommandBase extends CommandBase {
         player.sendChatMessage(command);
     }
 
-    boolean isSolidX(double x, double y, double z, World world) {
+    boolean isSolid(double x, double y, double z, World world) {
         double difference = Math.abs(x - Math.floor(x));
-        int xPos = (int) Math.floor(x);
-        int yPos = (int) Math.floor(y);
-        int zPos = (int) Math.floor(z);
         if (difference < 0.7 && difference > 0.3) { //player in the middle of the block
-            return isSolidBlock(xPos, yPos, zPos, world);
+            return isSolidZ(x, y, z, world);
         }
         if (difference < 0.3) {
-            return isSolidBlock(xPos, yPos, zPos, world) || isSolidBlock(xPos - 1, yPos, zPos, world);
+            return isSolidZ(x, y, z, world) || isSolidZ(x - 1, y, z, world);
         }
-        return isSolidBlock(xPos, yPos, zPos, world) || isSolidBlock(xPos + 1, yPos, zPos, world);
+        return isSolidZ(x, y, z, world) || isSolidZ(x + 1, y, z, world);
     }
 
     boolean isSolidZ(double x, double y, double z, World world) {
         double difference = Math.abs(z - Math.floor(z));
-        int xPos = (int) Math.floor(x);
-        int yPos = (int) Math.floor(y);
-        int zPos = (int) Math.floor(z);
         if (difference < 0.7 && difference > 0.3) { //player in the middle of the block
-            return isSolidBlock(xPos, yPos, zPos, world);
+            return isSolidBlock(x, y, z, world);
         }
         if (difference < 0.3) {
-            return isSolidBlock(xPos, yPos, zPos, world) || isSolidBlock(xPos, yPos, zPos - 1, world);
+            return isSolidBlock(x, y, z, world) || isSolidBlock(x, y, z - 1, world);
         }
-        return isSolidBlock(xPos, yPos, zPos, world) || isSolidBlock(xPos, yPos, zPos + 1, world);
+        return isSolidBlock(x, y, z, world) || isSolidBlock(x, y, z + 1, world);
     }
 
+    /*
     public boolean isSolid(double x, double y, double z, World world) {
         double differenceX = Math.abs(x - Math.floor(x));
         double differenceZ = Math.abs(z - Math.floor(z));
@@ -61,6 +56,9 @@ public abstract class TpCommandBase extends CommandBase {
         if (differenceZ < 0.3) {
             return isSolidX(xPos, yPos, zPos, world) || isSolidX(xPos, yPos, zPos - 1, world);
         }
+        if (differenceZ > 0.7) {
+            return isSolidX(xPos, yPos, zPos, world) || isSolidX(xPos, yPos, zPos + 1, world);
+        }
         if (differenceX < 0.7 && differenceX > 0.3) { //player in the middle of the block
             return isSolidBlock(xPos, yPos, zPos, world);
         }
@@ -69,6 +67,8 @@ public abstract class TpCommandBase extends CommandBase {
         }
         return isSolidBlock(xPos, yPos, zPos, world) || isSolidBlock(xPos + 1, yPos, zPos, world);
     }
+
+     */
 
     public boolean validBlock(double x, double y, double z, World world) {
         if (isSolid(x, y, z, world)) {
