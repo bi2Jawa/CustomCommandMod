@@ -20,7 +20,7 @@ public abstract class TpCommandBase extends CommandBase {
         player.sendChatMessage(command);
     }
 
-    boolean isSolidX(double x, double y, double z, World world) {
+    boolean validBlockX(double x, double y, double z, World world) {
         double difference = Math.abs(x - Math.floor(x));
         int xPos = (int)Math.floor(x);
         int yPos = (int)Math.floor(y);
@@ -34,9 +34,7 @@ public abstract class TpCommandBase extends CommandBase {
         return isSolid(xPos, yPos, zPos, world) || isSolid(xPos + 1, yPos, zPos, world);
     }
 
-
-
-    boolean isSolidZ(double x, double y, double z, World world) {
+    boolean validBlockZ(double x, double y, double z, World world) {
         double difference = Math.abs(z - Math.floor(z));
         int xPos = (int)Math.floor(x);
         int yPos = (int)Math.floor(y);
@@ -50,15 +48,48 @@ public abstract class TpCommandBase extends CommandBase {
         return isSolid(xPos, yPos, zPos, world) || isSolid(xPos, yPos, zPos + 1, world);
     }
 
+    public boolean isCorner(double x, double z) {
+        double xDifference = Math.abs(x - Math.floor(x));
+        double zDifference = Math.abs(z - Math.floor(z));
+        if (xDifference > 0.7 || xDifference < 0.3) { //player in the middle of the block
+            return (zDifference > 0.7 || zDifference < 0.3);
+        }
+        return false;
+    }
+
     public boolean validBlock(double x, double y, double z, World world) {
-        if (isSolidX(x, y, z, world) ||  isSolidZ(x, y, z, world)) {
+        if (isCorner(x, z)) {
+            double xDiff = Math.abs(x - Math.floor(x));
+            double zDiff = Math.abs(z - Math.floor(z));
+            if (xDiff < 0.3) {
+                xDiff = -1;
+            }
+            else {
+                xDiff = 1;
+            }
+            if (zDiff < 0.3) {
+                zDiff = -1;
+            }
+            else {
+                zDiff = 1;
+            }
+            if (validBlockX(x, y, z, world) || validBlockZ(x, y, z, world) || validBlockX(x, y, z + zDiff, world)) {
+                return (isAirGap(x, y, z, world)
+                        && isAirGap(x + xDiff, y, z, world)
+                        && isAirGap(x, y, z + zDiff, world)
+                        && isAirGap(x + xDiff, y, z + zDiff, world));
+
+            }
+        }
+        if (validBlockX(x, y, z, world) || validBlockZ(x, y, z, world)) {
             return isAirGap(x, y, z, world);
         }
         return false;
     }
+
     public boolean isAirGap(double x, double y, double z, World world){
-        if (!isSolidX(x, y + 1, z, world) && !isSolidZ(x, y + 1, z, world)) {
-            return (!isSolidX(x, y + 2, z, world) && !isSolidZ(x, y + 2, z, world));
+        if (!validBlockX(x, y + 1, z, world) && !validBlockZ(x, y + 1, z, world)) {
+            return (!validBlockX(x, y + 2, z, world) && !validBlockZ(x, y + 2, z, world));
         }
         return false;
     }
