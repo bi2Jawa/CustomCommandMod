@@ -1,4 +1,4 @@
-package com.github.bi2jawa.customcommands.Commands;
+package com.github.bi2jawa.customcommands.Commands.TpCommands;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -13,13 +13,10 @@ import java.util.List;
 
 
 public class ThroughCommand extends TpCommandBase {
-    public static boolean isSent = false;
-
     @Override
     public String getCommandName() {
-        return "forward";
+        return "through";
     }
-
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
@@ -57,7 +54,7 @@ public class ThroughCommand extends TpCommandBase {
             double[] pos = incrementAxis(posX, posZ, axisX, lookX, lookZ);
             posX = pos[0];
             posZ = pos[1];
-            if (!isSolid(posX, posY, posZ, world)) {
+            if (!isSolid(posX, posY, posZ, world) && !isSolid(posX, posY + 1, posZ, world)) {
                 if (axisX) {
                     posX = Math.floor(posX);
                     posX = posX + 0.5;
@@ -86,7 +83,7 @@ public class ThroughCommand extends TpCommandBase {
 
     @Override
     public List<String> getCommandAliases() {
-        return Arrays.asList("thru", "through");
+        return Arrays.asList("thru");
     }
 
     public double[] incrementAxis(double posX, double posZ, boolean axisX, double lookX, double lookZ) {

@@ -1,8 +1,10 @@
 package com.github.bi2jawa.customcommands;
 
-import com.github.bi2jawa.customcommands.Commands.*;
+import com.github.bi2jawa.customcommands.Commands.TpCommands.*;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
+import java.util.ArrayList;
 
 public class ChatBlocker {
     @SubscribeEvent
@@ -14,11 +16,20 @@ public class ChatBlocker {
             setSentFalse();
         }
     }
-    public boolean isSent(){
-        return TopCommand.isSent || BottomCommand.isSent || DownCommand.isSent || UpCommand.isSent || ThroughCommand.isSent;
+    public boolean isSent() {
+        ArrayList<TpCommandBase> commands = CustomCommandMod.tpCommands;
+        for (TpCommandBase command : commands) {
+            if (command.isSent) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setSentFalse(){
-        TopCommand.isSent = BottomCommand.isSent = DownCommand.isSent = UpCommand.isSent = ThroughCommand.isSent= false;
+        ArrayList<TpCommandBase> commands = CustomCommandMod.tpCommands;
+        for (TpCommandBase command: commands) {
+            command.isSent = false;
+        }
     }
 }

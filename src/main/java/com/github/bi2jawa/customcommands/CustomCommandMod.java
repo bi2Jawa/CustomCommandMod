@@ -1,0 +1,40 @@
+package com.github.bi2jawa.customcommands;
+
+import com.github.bi2jawa.customcommands.Commands.HelpCommand;
+import com.github.bi2jawa.customcommands.Commands.TpCommands.*;
+import net.minecraft.command.CommandBase;
+import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+
+import java.util.ArrayList;
+
+@Mod(modid = "CustomCommandMod", version = "0.1.2", useMetadata = true)
+public class CustomCommandMod {
+    public static ArrayList<TpCommandBase> tpCommands = new ArrayList<>();
+    public static ArrayList<CommandBase> commands = new ArrayList<>();
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+        registerCommand(new TopCommand());
+        registerCommand(new UpCommand());
+        registerCommand(new BottomCommand());
+        registerCommand(new DownCommand());
+        registerCommand(new ThroughCommand());
+        registerCommand(new HelpCommand());
+
+        MinecraftForge.EVENT_BUS.register(new ChatBlocker());
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    public void registerCommand(CommandBase command) {
+        ClientCommandHandler.instance.registerCommand(command);
+        commands.add(command);
+        if (command instanceof TpCommandBase) {
+            tpCommands.add((TpCommandBase) command);
+        }
+    }
+}
+
+
+

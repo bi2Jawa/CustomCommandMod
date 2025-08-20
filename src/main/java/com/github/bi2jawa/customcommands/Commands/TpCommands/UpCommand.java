@@ -1,4 +1,4 @@
-package com.github.bi2jawa.customcommands.Commands;
+package com.github.bi2jawa.customcommands.Commands.TpCommands;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -8,8 +8,7 @@ import net.minecraft.command.NumberInvalidException;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
-public class UpCommand extends TpCommandBase{
-    public static boolean isSent = false;
+public class UpCommand extends TpCommandBase {
     @Override
     public String getCommandName() {
         return "up";
