@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 import java.util.ArrayList;
 
-@Mod(modid = "CustomCommandMod", version = "0.1.2", useMetadata = true)
+@Mod(modid = "CustomCommandMod", version = "0.1.3", useMetadata = true)
 public class CustomCommandMod {
     public static ArrayList<TpCommandBase> tpCommands = new ArrayList<>();
     public static ArrayList<CommandBase> commands = new ArrayList<>();
