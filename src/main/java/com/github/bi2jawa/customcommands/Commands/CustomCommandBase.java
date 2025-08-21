@@ -20,24 +20,13 @@ public abstract class CustomCommandBase extends CommandBase {
         return toggle;
     }
 
-    public boolean toggleCheck() {
-        return toggle;
-    }
-
-    public String name(String name) {
-        if (toggle) {
-            return name;
-        }
-        return " " + name;
-    }
-
     public boolean stopCheck(String[] args, EntityPlayerSP player) {
         if (toggle != toggleCheck(args)) {
             player.addChatMessage(new ChatComponentText("§aCommand /" + getCommandName() + " has been toggled"));
             return true;
         }
         if (!toggle) {
-            player.sendChatMessage("/ " + getCommandName());
+            player.sendChatMessage("/" + getCommandName());
             return true;
         }
         return false;

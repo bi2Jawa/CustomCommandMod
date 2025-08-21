@@ -66,7 +66,6 @@ public class HelpCommand extends CustomCommandBase {
     }
 
     public void runCommand(String[] args, EntityPlayerSP player, World world) throws CommandException {
-        return;
     }
 
     public void help(ICommandSender sender) {
@@ -78,11 +77,6 @@ public class HelpCommand extends CustomCommandBase {
             message = message + ": §f" + command.getCommandUsage(sender);
             player.addChatMessage(new ChatComponentText(message));
         }
-    }
-
-    public void processNewCommand(ICommandSender sender, String[] args, CustomCommandBase command, EntityPlayerSP player, World world) throws CommandException {
-        String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
-        command.runCommand(newArgs, player, world);
     }
 
     @Override

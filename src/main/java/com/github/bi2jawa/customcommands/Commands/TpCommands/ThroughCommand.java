@@ -1,6 +1,5 @@
 package com.github.bi2jawa.customcommands.Commands.TpCommands;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
