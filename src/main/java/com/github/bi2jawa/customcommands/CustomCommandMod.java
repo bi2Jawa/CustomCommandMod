@@ -1,8 +1,8 @@
 package com.github.bi2jawa.customcommands;
 
+import com.github.bi2jawa.customcommands.Commands.CustomCommandBase;
 import com.github.bi2jawa.customcommands.Commands.HelpCommand;
 import com.github.bi2jawa.customcommands.Commands.TpCommands.*;
-import net.minecraft.command.CommandBase;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 @Mod(modid = "CustomCommandMod", version = "0.1.3", useMetadata = true)
 public class CustomCommandMod {
     public static ArrayList<TpCommandBase> tpCommands = new ArrayList<>();
-    public static ArrayList<CommandBase> commands = new ArrayList<>();
+    public static ArrayList<CustomCommandBase> commands = new ArrayList<>();
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         registerCommand(new TopCommand());
@@ -27,7 +27,7 @@ public class CustomCommandMod {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    public void registerCommand(CommandBase command) {
+    public void registerCommand(CustomCommandBase command) {
         ClientCommandHandler.instance.registerCommand(command);
         commands.add(command);
         if (command instanceof TpCommandBase) {

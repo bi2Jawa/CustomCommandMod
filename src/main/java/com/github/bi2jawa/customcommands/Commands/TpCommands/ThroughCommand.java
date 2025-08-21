@@ -25,10 +25,7 @@ public class ThroughCommand extends TpCommandBase {
 
 
     @Override
-    public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-        Minecraft mc = Minecraft.getMinecraft();
-        EntityPlayerSP player = mc.thePlayer;
-        World world = mc.theWorld;
+    public void runCommand(String[] args, EntityPlayerSP player, World world) throws CommandException {
         int distance = 5;
         int worldSize = 255;
         boolean sent = false;

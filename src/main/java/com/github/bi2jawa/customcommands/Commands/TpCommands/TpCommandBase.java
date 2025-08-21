@@ -1,12 +1,12 @@
 package com.github.bi2jawa.customcommands.Commands.TpCommands;
 
+import com.github.bi2jawa.customcommands.Commands.CustomCommandBase;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.command.CommandBase;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class TpCommandBase extends CommandBase {
+public abstract class TpCommandBase extends CustomCommandBase {
     public boolean isSent = false;
     boolean isSolidBlock(double posX, double posY, double posZ, World world) {
         int blockX = (int) Math.floor(posX);

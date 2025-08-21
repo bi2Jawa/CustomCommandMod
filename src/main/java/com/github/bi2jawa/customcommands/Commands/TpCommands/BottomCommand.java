@@ -23,6 +23,14 @@ public class BottomCommand extends TpCommandBase {
         Minecraft mc = Minecraft.getMinecraft();
         EntityPlayerSP player = mc.thePlayer;
         World world = mc.theWorld;
+        if (stopCheck(args, player)) {
+            return;
+        }
+        runCommand(args, player, world);
+    }
+
+    @Override
+    public void runCommand(String[] args, EntityPlayerSP player, World world) throws CommandException {
         boolean sent = false;
         double posX = player.posX;
         int posY = (int)Math.floor(player.posY);

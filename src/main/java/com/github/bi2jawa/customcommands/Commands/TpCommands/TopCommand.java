@@ -19,10 +19,7 @@ public class TopCommand extends TpCommandBase {
     }
 
     @Override
-    public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-        Minecraft mc = Minecraft.getMinecraft();
-        EntityPlayerSP player = mc.thePlayer;
-        World world = mc.theWorld;
+    public void runCommand(String[] args, EntityPlayerSP player, World world) throws CommandException {
         boolean sent = false;
         int worldSize = 255;
         double posX = player.posX;

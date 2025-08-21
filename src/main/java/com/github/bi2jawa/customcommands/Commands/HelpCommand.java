@@ -7,16 +7,17 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.world.World;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class HelpCommand extends CommandBase {
+public class HelpCommand extends CustomCommandBase {
 
     @Override
     public String getCommandName() {
-        return "ccm";
+        return " help";
     }
 
     @Override
@@ -26,20 +27,35 @@ public class HelpCommand extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+        Minecraft mc = Minecraft.getMinecraft();
+        EntityPlayerSP player = mc.thePlayer;
+        World world = mc.theWorld;
         if (args.length > 0) {
             if (args[0].equals("help")) {
                 help(sender);
                 return;
             }
-            for (CommandBase command: CustomCommandMod.commands) {
-                if (command.getCommandName().equals(args[0])) {
-                    processNewCommand(sender, args, command);
+            for (CustomCommandBase command: CustomCommandMod.commands) {
+                String commandName = command.getCommandName();
+                commandName = commandName.replaceAll(" ","");
+                if (commandName.equals(args[0])) {
+                    String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
+                    if (command.toggle != command.toggleCheck(newArgs)) {
+                        player.addChatMessage(new ChatComponentText("§aCommand /" + command.getCommandName() + " has been toggled"));
+                        return;
+                    }
+                    command.runCommand(newArgs, player, world);
                     return;
                 }
                 if (!command.getCommandAliases().isEmpty()) {
+                    String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
+                    if (command.toggle != command.toggleCheck(newArgs)) {
+                        player.addChatMessage(new ChatComponentText("§aCommand /" + command.getCommandName() + " has been toggled"));
+                        return;
+                    }
                     for (String alias: command.getCommandAliases()) {
                         if (alias.equals(args[1])) {
-                            processNewCommand(sender, args, command);
+                            command.runCommand(newArgs, player, world);
                             return;
                         }
                     }
@@ -49,18 +65,24 @@ public class HelpCommand extends CommandBase {
         help(sender);
     }
 
+    public void runCommand(String[] args, EntityPlayerSP player, World world) throws CommandException {
+        return;
+    }
+
     public void help(ICommandSender sender) {
+
         for (CommandBase command : CustomCommandMod.commands) {
             Minecraft mc = Minecraft.getMinecraft();
             EntityPlayerSP player = mc.thePlayer;
-            String message = ("§2ccm " + command.getCommandName() + ": §f" + command.getCommandUsage(sender));
+            String message = ("§2/ccm " + command.getCommandName());
+            message = message + ": §f" + command.getCommandUsage(sender);
             player.addChatMessage(new ChatComponentText(message));
         }
     }
 
-    public void processNewCommand(ICommandSender sender, String[] args, CommandBase command) throws CommandException {
+    public void processNewCommand(ICommandSender sender, String[] args, CustomCommandBase command, EntityPlayerSP player, World world) throws CommandException {
         String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
-        command.processCommand(sender, newArgs);
+        command.runCommand(newArgs, player, world);
     }
 
     @Override
