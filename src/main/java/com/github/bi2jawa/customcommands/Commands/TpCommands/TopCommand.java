@@ -39,9 +39,4 @@ public class TopCommand extends TpCommandBase {
         }
         isSent = sent;
     }
-
-    @Override
-    public boolean canCommandSenderUseCommand(ICommandSender sender) {
-        return true;
-    }
 }

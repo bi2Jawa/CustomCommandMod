@@ -21,6 +21,7 @@ public class CustomCommandMod {
         registerCommand(new BottomCommand());
         registerCommand(new DownCommand());
         registerCommand(new ThroughCommand());
+        registerCommand(new ThruCommand());
         registerCommand(new HelpCommand());
 
         MinecraftForge.EVENT_BUS.register(new ChatBlocker());

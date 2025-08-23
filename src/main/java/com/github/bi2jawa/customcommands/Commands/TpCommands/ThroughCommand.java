@@ -7,10 +7,6 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
 
-import java.util.Arrays;
-import java.util.List;
-
-
 public class ThroughCommand extends TpCommandBase {
     @Override
     public String getCommandName() {
@@ -70,18 +66,6 @@ public class ThroughCommand extends TpCommandBase {
         isSent = sent;
     }
 
-
-    @Override
-    public boolean canCommandSenderUseCommand(ICommandSender sender) {
-        return true;
-    }
-
-
-    @Override
-    public List<String> getCommandAliases() {
-        return Arrays.asList("thru");
-    }
-
     public double[] incrementAxis(double posX, double posZ, boolean axisX, double lookX, double lookZ) {
         if (axisX) {
             if (lookX > 0) {
@@ -102,6 +86,5 @@ public class ThroughCommand extends TpCommandBase {
         return pos;
     }
 }
-
 
 

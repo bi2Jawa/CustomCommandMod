@@ -57,9 +57,4 @@ public class DownCommand extends TpCommandBase {
             return false;
         }
     }
-
-    @Override
-    public boolean canCommandSenderUseCommand(ICommandSender sender) {
-        return true;
-    }
 }

@@ -1,5 +1,6 @@
 package com.github.bi2jawa.customcommands.Commands;
 
+import com.github.bi2jawa.customcommands.Config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandBase;
@@ -8,13 +9,17 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
+import java.io.File;
+
 public abstract class CustomCommandBase extends CommandBase {
-    public boolean toggle = true;
+    File file = new File("CustomCommandConfig");
+    public boolean toggle = Config.readBool(file, this, "toggle");
 
     public boolean toggleCheck(String[] args) {
         if (args.length > 0) {
             if (args[0].equals("toggle")) {
                 toggle = !toggle;
+                Config.writeConfig(this, toggle, "toggle");
             }
         }
         return toggle;
@@ -44,4 +49,9 @@ public abstract class CustomCommandBase extends CommandBase {
     }
 
     public abstract void runCommand(String[] args, EntityPlayerSP player, World world) throws CommandException;
+
+    @Override
+    public boolean canCommandSenderUseCommand(ICommandSender sender) {
+        return true;
+    }
 }

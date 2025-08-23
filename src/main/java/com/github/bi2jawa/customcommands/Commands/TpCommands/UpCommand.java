@@ -59,9 +59,4 @@ public class UpCommand extends TpCommandBase {
             return false;
         }
     }
-
-    @Override
-    public boolean canCommandSenderUseCommand(ICommandSender sender) {
-        return true;
-    }
 }
