@@ -16,7 +16,7 @@ public class HelpCommand extends CustomCommandBase {
 
     @Override
     public String getCommandName() {
-        return " help";
+        return "ccm";
     }
 
     @Override
@@ -79,13 +79,13 @@ public class HelpCommand extends CustomCommandBase {
             else {
                 message = "§4";
             }
-            message = (message + "/ccm " + command.getCommandName());
+            message = (message + "/");
+            if (!command.getCommandName().equals("ccm")) {
+                message = (message + "ccm ");
+            }
+            message = (message +  command.getCommandName());
             message = message + ": §f" + command.getCommandUsage(sender);
             player.addChatMessage(new ChatComponentText(message));
         }
-    }
-
-    public List<String> getCommandAliases() {
-        return Collections.singletonList("ccm");
     }
 }

@@ -54,4 +54,9 @@ public abstract class CustomCommandBase extends CommandBase {
     public boolean canCommandSenderUseCommand(ICommandSender sender) {
         return true;
     }
+
+    @Override
+    public String getCommandUsage(ICommandSender sender) {
+        return "";
+    }
 }

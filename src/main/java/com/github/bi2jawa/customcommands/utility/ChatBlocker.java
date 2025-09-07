@@ -1,6 +1,7 @@
-package com.github.bi2jawa.customcommands;
+package com.github.bi2jawa.customcommands.utility;
 
 import com.github.bi2jawa.customcommands.Commands.TpCommands.*;
+import com.github.bi2jawa.customcommands.CustomCommandMod;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
