@@ -25,9 +25,4 @@ public class CommandChecker {
         }
         return false;
     }
-
-    public static void GetServerCommands(ICommandSender sender) {
-        PacketReceived.intercept = true;
-        Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new C14PacketTabComplete("/"));
-    }
 }

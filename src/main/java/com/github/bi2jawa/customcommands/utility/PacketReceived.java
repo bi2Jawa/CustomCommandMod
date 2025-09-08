@@ -41,7 +41,7 @@ public class PacketReceived extends Event{
     }
 
     public void CheckCommands(String[] commands) {
-        ArrayList<String> newCommands = new ArrayList<String>();
+        ArrayList<String> newCommands = new ArrayList<>();
         for (String command: commands) {
             if (!Config.readConfig("server command", command)) {
                 newCommands.add(command);
