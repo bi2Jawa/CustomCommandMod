@@ -23,7 +23,7 @@ public class TestCommand extends CustomCommandBase {
         for (String arg: args) {
             command = command + " " + arg;
         }
-        if (CommandChecker.checkClientCommands(sender, args[0])) {
+        if (CommandChecker.IsClientCommand(sender, args[0])) {
             ClientCommandHandler.instance.executeCommand(sender, command);
             return;
         }

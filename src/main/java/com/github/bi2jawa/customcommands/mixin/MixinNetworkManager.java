@@ -34,8 +34,6 @@ public abstract class MixinNetworkManager extends SimpleChannelInboundHandler<Pa
             return;
         // Call packet received event
         PacketReceived event = new PacketReceived(packet);
-        //MinecraftForge.EVENT_BUS.post(event);
-        //event.setCanceled(true);
         if (event.isCanceled()) {
             ci.cancel();
         }
