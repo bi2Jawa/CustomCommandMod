@@ -1,6 +1,7 @@
 package com.github.bi2jawa.customcommands;
 
 import com.github.bi2jawa.customcommands.Commands.CustomCommandBase;
+import com.github.bi2jawa.customcommands.Commands.FindCommands;
 import com.github.bi2jawa.customcommands.Commands.HelpCommand;
 import com.github.bi2jawa.customcommands.Commands.TestCommand;
 import com.github.bi2jawa.customcommands.Commands.TpCommands.*;
@@ -26,6 +27,7 @@ public class CustomCommandMod {
         registerCommand(new ThruCommand());
         registerCommand(new HelpCommand());
         registerCommand(new TestCommand());
+        registerCommand(new FindCommands());
 
         MinecraftForge.EVENT_BUS.register(new ChatBlocker());
         MinecraftForge.EVENT_BUS.register(this);

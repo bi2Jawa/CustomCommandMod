@@ -27,4 +27,20 @@ public class Config {
             config.save();
         }
     }
+
+    public static void writeConfig(String category, String command, Boolean bool) {
+        config.get(category, command, false).setValue(bool);
+        if (config.hasChanged()) {
+            config.save();
+        }
+    }
+
+    public static Boolean readConfig(String category, String command) {
+        return config.get(category, command, false).getBoolean();
+    }
+
+    public static void clearConfig(String category) {
+        config.getCategory(category).clear();
+        config.save();
+    }
 }
