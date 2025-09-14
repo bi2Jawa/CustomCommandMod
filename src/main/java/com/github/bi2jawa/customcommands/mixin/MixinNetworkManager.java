@@ -1,6 +1,6 @@
 package com.github.bi2jawa.customcommands.mixin;
 
-import com.github.bi2jawa.customcommands.utility.PacketReceived;
+import com.github.bi2jawa.customcommands.events.PacketReceived;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import net.minecraft.network.EnumPacketDirection;

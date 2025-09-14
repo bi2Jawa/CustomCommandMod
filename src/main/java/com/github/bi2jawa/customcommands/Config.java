@@ -35,6 +35,11 @@ public class Config {
         }
     }
 
+    public static void writeConfig(String category, String command, String output) {
+        config.get(category, command, output);
+        config.save();
+    }
+
     public static Boolean readConfig(String category, String command) {
         return config.get(category, command, false).getBoolean();
     }

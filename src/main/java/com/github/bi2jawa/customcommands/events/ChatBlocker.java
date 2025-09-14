@@ -1,4 +1,4 @@
-package com.github.bi2jawa.customcommands.utility;
+package com.github.bi2jawa.customcommands.events;
 
 import com.github.bi2jawa.customcommands.Commands.TpCommands.*;
 import com.github.bi2jawa.customcommands.CustomCommandMod;
