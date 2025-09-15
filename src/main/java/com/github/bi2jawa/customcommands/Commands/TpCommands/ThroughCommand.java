@@ -1,5 +1,6 @@
 package com.github.bi2jawa.customcommands.Commands.TpCommands;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -20,7 +21,7 @@ public class ThroughCommand extends TpCommandBase {
 
 
     @Override
-    public void runCommand(String[] args, EntityPlayerSP player, World world) throws CommandException {
+    public void runCommand(String[] args, EntityPlayerSP player, World world, ICommandSender sender) throws CommandException {
         int distance = 5;
         int worldSize = 255;
         boolean sent = false;
@@ -55,7 +56,6 @@ public class ThroughCommand extends TpCommandBase {
                     posZ = posZ + 0.5;
                 }
                 tp(posX, posY, posZ, player);
-                player.addChatMessage(new ChatComponentText("§aTeleported through wall"));
                 sent = true;
                 break;
             }
@@ -84,6 +84,10 @@ public class ThroughCommand extends TpCommandBase {
         pos[0] = posX;
         pos[1] = posZ;
         return pos;
+    }
+    @Override
+    public void tpMessage() {
+        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("§aTeleported through wall"));
     }
 }
 

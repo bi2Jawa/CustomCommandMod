@@ -1,5 +1,6 @@
 package com.github.bi2jawa.customcommands.Commands.TpCommands;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -18,7 +19,7 @@ public class TopCommand extends TpCommandBase {
     }
 
     @Override
-    public void runCommand(String[] args, EntityPlayerSP player, World world) throws CommandException {
+    public void runCommand(String[] args, EntityPlayerSP player, World world, ICommandSender sender) throws CommandException {
         boolean sent = false;
         int worldSize = 255;
         double posX = player.posX;
@@ -28,7 +29,6 @@ public class TopCommand extends TpCommandBase {
         for (int i = worldSize; i > posY; i--) {
             if (validBlock(posX, i, posZ, world)) {
                 tp(posX, i+1, posZ, player);
-                player.addChatMessage(new ChatComponentText("§aTeleported to the top of the map"));
                 sent = true;
                 break;
             }
@@ -38,5 +38,10 @@ public class TopCommand extends TpCommandBase {
             player.addChatMessage(new ChatComponentText("§cYou are already at the highest block"));
         }
         isSent = sent;
+    }
+
+    @Override
+    public void tpMessage() {
+        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("§aTeleported to the top of the map"));
     }
 }

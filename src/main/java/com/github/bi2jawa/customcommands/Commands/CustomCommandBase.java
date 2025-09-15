@@ -1,6 +1,7 @@
 package com.github.bi2jawa.customcommands.Commands;
 
 import com.github.bi2jawa.customcommands.Config;
+import com.github.bi2jawa.customcommands.CustomCommandMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandBase;
@@ -8,6 +9,7 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
+import net.minecraftforge.client.ClientCommandHandler;
 
 import java.io.File;
 
@@ -42,13 +44,24 @@ public abstract class CustomCommandBase extends CommandBase {
         Minecraft mc = Minecraft.getMinecraft();
         EntityPlayerSP player = mc.thePlayer;
         World world = mc.theWorld;
-        if (stopCheck(args, player)) {
+        /*if (stopCheck(args, player)) {
             return;
         }
-        runCommand(args, player, world);
+         */
+        if (args.length == 0 || !args[0].equals("toggle")) {
+            runCommand(args, player, world, sender);
+            return;
+        }
+        player.addChatMessage(new ChatComponentText("§aCommand /" + this.getCommandName() + " has been toggled"));
+        if (ClientCommandHandler.instance.getCommands().containsKey(this.getCommandName())) {
+            //ClientCommandHandler.instance.getPossibleCommands(sender).remove(this);
+            ClientCommandHandler.instance.getCommands().remove(this.getCommandName());
+            return;
+        }
+        ClientCommandHandler.instance.registerCommand(this);
     }
 
-    public abstract void runCommand(String[] args, EntityPlayerSP player, World world) throws CommandException;
+    public abstract void runCommand(String[] args, EntityPlayerSP player, World world, ICommandSender sender) throws CommandException;
 
     @Override
     public boolean canCommandSenderUseCommand(ICommandSender sender) {

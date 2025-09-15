@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 import java.util.Arrays;
 
-public class HelpCommand extends CustomCommandBase {
+public class CCMCommand extends CustomCommandBase {
 
     @Override
     public String getCommandName() {
@@ -34,14 +34,14 @@ public class HelpCommand extends CustomCommandBase {
             }
             for (CustomCommandBase command: CustomCommandMod.commands) {
                 String commandName = command.getCommandName();
-                commandName = commandName.replaceAll(" ","");
                 if (commandName.equals(args[0])) {
                     String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
                     if (command.toggle != command.toggleCheck(newArgs)) {
-                        player.addChatMessage(new ChatComponentText("§aCommand /" + command.getCommandName() + " has been toggled"));
+                        //player.addChatMessage(new ChatComponentText("§aCommand /" + command.getCommandName() + " has been toggled"));
+                        command.processCommand(sender, newArgs);
                         return;
                     }
-                    command.runCommand(newArgs, player, world);
+                    command.runCommand(newArgs, player, world, sender);
                     return;
                 }
                 if (!command.getCommandAliases().isEmpty()) {
@@ -52,7 +52,7 @@ public class HelpCommand extends CustomCommandBase {
                     }
                     for (String alias: command.getCommandAliases()) {
                         if (alias.equals(args[1])) {
-                            command.runCommand(newArgs, player, world);
+                            command.runCommand(newArgs, player, world, sender);
                             return;
                         }
                     }
@@ -62,7 +62,7 @@ public class HelpCommand extends CustomCommandBase {
         help(sender);
     }
 
-    public void runCommand(String[] args, EntityPlayerSP player, World world) throws CommandException {
+    public void runCommand(String[] args, EntityPlayerSP player, World world, ICommandSender sender) throws CommandException {
     }
 
     public void help(ICommandSender sender) {

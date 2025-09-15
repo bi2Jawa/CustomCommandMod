@@ -1,5 +1,6 @@
 package com.github.bi2jawa.customcommands.Commands.TpCommands;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -19,7 +20,7 @@ public class UpCommand extends TpCommandBase {
     }
 
     @Override
-    public void runCommand(String[] args, EntityPlayerSP player, World world) throws CommandException {
+    public void runCommand(String[] args, EntityPlayerSP player, World world, ICommandSender sender) throws CommandException {
         boolean sent = false;
         int worldSize = 255;
         double posX = player.posX;
@@ -29,7 +30,6 @@ public class UpCommand extends TpCommandBase {
         if (args.length != 0) {
             if (isNumber(args[0])) {
                 int height = parseInt(args[0]);
-                player.addChatMessage(new ChatComponentText("§aTeleported up " + height + " blocks"));
                 isSent = true;
                 tp(posX, posY + height, posZ, player);
                 return;
@@ -39,7 +39,6 @@ public class UpCommand extends TpCommandBase {
         for (int i = posY; i < worldSize; i++) {
             if (validBlock(posX, i, posZ, world)) {
                     tp(posX, i+1, posZ, player);
-                    player.addChatMessage(new ChatComponentText("§aTeleported up"));
                     isSent = sent = true;
                     break;
                 }
@@ -58,5 +57,10 @@ public class UpCommand extends TpCommandBase {
         catch (NumberInvalidException e) {
             return false;
         }
+    }
+
+    @Override
+    public void tpMessage() {
+        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("§aTeleported up"));
     }
 }

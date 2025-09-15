@@ -19,7 +19,7 @@ public class FindCommands extends CustomCommandBase{
     }
 
     @Override
-    public void runCommand(String[] args, EntityPlayerSP player, World world) throws CommandException {
+    public void runCommand(String[] args, EntityPlayerSP player, World world, ICommandSender sender) throws CommandException {
         PacketReceived.intercept = true;
         PacketReceived.reset = (args.length != 0);
         player.sendQueue.addToSendQueue(new C14PacketTabComplete("/"));

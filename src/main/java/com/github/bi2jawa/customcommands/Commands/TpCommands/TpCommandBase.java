@@ -60,4 +60,6 @@ public abstract class TpCommandBase extends CustomCommandBase {
         }
         return false;
     }
+
+    public abstract  void tpMessage();
 }

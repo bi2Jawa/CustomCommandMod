@@ -12,9 +12,17 @@ public class ChatBlocker {
     public void onChat(ClientChatReceivedEvent event){
         boolean sent = isSent();
         String message = event.message.getFormattedText();
-        if ((message.contains("Teleporting you to") || message.contains("Teleported")) && sent){
+        if ((message.contains("§aTeleporting you to") || message.contains("Teleported") || message.contains("§cYou do not have permission to use TP in this house.")) && sent){
             event.setCanceled(true);
             setSentFalse();
+        }
+
+        ArrayList<TpCommandBase> commands = CustomCommandMod.tpCommands;
+        for (TpCommandBase command: commands) {
+            if (command.isSent) {
+                command.tpMessage();
+            }
+            command.isSent = false;
         }
     }
     public boolean isSent() {

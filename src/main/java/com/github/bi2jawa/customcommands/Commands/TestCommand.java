@@ -32,6 +32,6 @@ public class TestCommand extends CustomCommandBase {
     }
 
     @Override
-    public void runCommand(String[] args, EntityPlayerSP player, World world) {
+    public void runCommand(String[] args, EntityPlayerSP player, World world, ICommandSender sender) {
     }
 }
