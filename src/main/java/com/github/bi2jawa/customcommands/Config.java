@@ -36,8 +36,10 @@ public class Config {
     }
 
     public static void writeConfig(String category, String command, String output) {
-        config.get(category, command, output);
-        config.save();
+        config.get(category, command, "").setValue(output);
+        if (config.hasChanged()) {
+            config.save();
+        }
     }
 
     public static Boolean readConfig(String category, String command) {

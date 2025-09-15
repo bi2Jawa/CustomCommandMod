@@ -20,7 +20,8 @@ public class RemoveCommand extends CustomCommandBase{
             player.addChatMessage(new ChatComponentText("please add a command to remove"));
             return;
         }
-        Config.config.getCategory("CustomCommand").remove(args[0]);
+        Config.config.getCategory("customcommand").remove(args[0]);
+        Config.config.save();
         ClientCommandHandler.instance.getCommands().remove(args[0]);
     }
 }
