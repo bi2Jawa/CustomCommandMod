@@ -1,7 +1,6 @@
-package com.github.bi2jawa.customcommands.Commands;
+package com.github.bi2jawa.customcommands.Commands.CommandBases;
 
 import com.github.bi2jawa.customcommands.Config;
-import com.github.bi2jawa.customcommands.CustomCommandMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandBase;

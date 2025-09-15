@@ -1,5 +1,6 @@
-package com.github.bi2jawa.customcommands.Commands;
+package com.github.bi2jawa.customcommands.Commands.UtilityCommands;
 
+import com.github.bi2jawa.customcommands.Commands.CommandBases.CustomCommandBase;
 import com.github.bi2jawa.customcommands.events.PacketReceived;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandException;
@@ -7,7 +8,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.network.play.client.C14PacketTabComplete;
 import net.minecraft.world.World;
 
-public class FindCommands extends CustomCommandBase{
+public class FindCommands extends CustomCommandBase {
     @Override
     public String getCommandName() {
         return "find";

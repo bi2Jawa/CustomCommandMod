@@ -1,21 +1,17 @@
-package com.github.bi2jawa.customcommands.Commands;
+package com.github.bi2jawa.customcommands.Commands.UtilityCommands;
 
-import com.github.bi2jawa.customcommands.Commands.CommandAddons.CommandChecker;
-import com.github.bi2jawa.customcommands.Commands.CommandAddons.CreateCommand;
+import com.github.bi2jawa.customcommands.Commands.CommandAddons.CreateCustomCommand;
+import com.github.bi2jawa.customcommands.Commands.CommandBases.CustomCommandBase;
 import com.github.bi2jawa.customcommands.Config;
-import com.github.bi2jawa.customcommands.CustomCommandMod;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
-import net.minecraftforge.client.ClientCommandHandler;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-public class RegisterCommand extends CustomCommandBase{
+public class RegisterCommand extends CustomCommandBase {
     @Override
     public String getCommandName() {
         return "register";
@@ -34,6 +30,6 @@ public class RegisterCommand extends CustomCommandBase{
         }
         Config.config.get("customcommand", command, "").setValue(output);
         Config.config.save();
-        CreateCommand.create(command, output);
+        CreateCustomCommand.create(command, output);
     }
 }

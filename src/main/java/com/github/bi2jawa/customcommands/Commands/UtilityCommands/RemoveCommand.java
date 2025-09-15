@@ -1,5 +1,6 @@
-package com.github.bi2jawa.customcommands.Commands;
+package com.github.bi2jawa.customcommands.Commands.UtilityCommands;
 
+import com.github.bi2jawa.customcommands.Commands.CommandBases.CustomCommandBase;
 import com.github.bi2jawa.customcommands.Config;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.CommandException;
@@ -8,7 +9,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraftforge.client.ClientCommandHandler;
 
-public class RemoveCommand extends CustomCommandBase{
+public class RemoveCommand extends CustomCommandBase {
     @Override
     public String getCommandName() {
         return "remove";

@@ -1,6 +1,6 @@
 package com.github.bi2jawa.customcommands.Commands.TpCommands;
 
-import com.github.bi2jawa.customcommands.Commands.CustomCommandBase;
+import com.github.bi2jawa.customcommands.Commands.CommandBases.CustomCommandBase;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.BlockPos;

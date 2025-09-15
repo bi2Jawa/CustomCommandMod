@@ -1,6 +1,6 @@
 package com.github.bi2jawa.customcommands;
 
-import com.github.bi2jawa.customcommands.Commands.CustomCommandBase;
+import com.github.bi2jawa.customcommands.Commands.CommandBases.CustomCommandBase;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
