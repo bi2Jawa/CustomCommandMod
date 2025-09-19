@@ -21,11 +21,11 @@ public class CreateCustomCommand {
             public void runCommand(String[] args, EntityPlayerSP player, World world, ICommandSender sender) throws CommandException {
                 String newOutput = output;
                 for (String arg: args){
-                    newOutput += arg + " ";
+                    newOutput += " " + arg;
                 }
                 if (ClientCommandHandler.instance.executeCommand(sender, newOutput) == 1)
                     return;
-                player.sendChatMessage(output);
+                player.sendChatMessage(newOutput);
             }
 
             @Override
@@ -35,9 +35,12 @@ public class CreateCustomCommand {
         });
 
         (new CustomCommandMod()).registerCommand(command);
+        //if (command.toggle)
+            //ClientCommandHandler.instance.registerCommand(command);
         return command;
-        //ClientCommandHandler.instance.registerCommand(command);
     }
+
+
     public static void read(boolean called){
         ConfigCategory commands = Config.config.getCategory("customcommand");
         Set<String> keys = commands.keySet();

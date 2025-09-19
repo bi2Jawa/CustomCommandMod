@@ -15,7 +15,7 @@ public class TopCommand extends TpCommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "Teleports player to the highest block directly above them";
+        return "Teleports player to the highest block directly up";
     }
 
     @Override

@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class RegisterCommand extends CustomCommandBase {
     @Override
     public String getCommandName() {
-        return "register";
+        return "create";
     }
 
     @Override

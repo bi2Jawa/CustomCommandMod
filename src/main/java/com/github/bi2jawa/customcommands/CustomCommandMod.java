@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Mod(modid = "Custom Commands Mod", version = "0.1.3", useMetadata = true)
 public class CustomCommandMod {
@@ -44,6 +45,13 @@ public class CustomCommandMod {
     public void registerCommand(CustomCommandBase command) {
         if (command.toggle)
             ClientCommandHandler.instance.registerCommand(command);
+        for (int i = 0; i < commands.size(); i++) {
+            CustomCommandBase commandBase = commands.get(i);
+            if (Objects.equals(commandBase.getCommandName(), command.getCommandName())) {
+                commands.set(i, commandBase);
+                return;
+            }
+        }
         commands.add(command);
         if (command instanceof TpCommandBase) {
             tpCommands.add((TpCommandBase) command);

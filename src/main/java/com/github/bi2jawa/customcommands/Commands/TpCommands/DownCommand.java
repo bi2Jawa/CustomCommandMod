@@ -16,7 +16,7 @@ public class DownCommand extends TpCommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "Teleports player to the next block directly below them";
+        return "Teleports player to the next block directly below";
     }
 
     @Override

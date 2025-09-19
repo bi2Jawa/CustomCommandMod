@@ -8,18 +8,30 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.ArrayList;
 
 public class ChatBlocker {
+    boolean success = false;
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event){
         boolean sent = isSent();
+        success = false;
         String message = event.message.getFormattedText();
-        if ((message.contains("§aTeleporting you to") || message.contains("Teleported") || message.contains("§cYou do not have permission to use TP in this house.")) && sent){
+        if (!sent){
+            return;
+        }
+        if (message.contains("§cYou do not have permission to use TP in this house.")){
             event.setCanceled(true);
             setSentFalse();
+            return;
+        }
+        if (message.contains("§aTeleporting you to") || message.contains("Teleported")){
+            event.setCanceled(true);
+            success = true;
+            setSentFalse();
+            return;
         }
 
         ArrayList<TpCommandBase> commands = CustomCommandMod.tpCommands;
         for (TpCommandBase command: commands) {
-            if (command.isSent) {
+            if (command.isSent && success) {
                 command.tpMessage();
             }
             command.isSent = false;
@@ -38,6 +50,9 @@ public class ChatBlocker {
     public void setSentFalse(){
         ArrayList<TpCommandBase> commands = CustomCommandMod.tpCommands;
         for (TpCommandBase command: commands) {
+            if (command.isSent && success) {
+                command.tpMessage();
+            }
             command.isSent = false;
         }
     }

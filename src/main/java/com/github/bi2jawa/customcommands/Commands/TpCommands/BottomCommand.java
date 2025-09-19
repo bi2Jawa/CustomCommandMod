@@ -15,9 +15,9 @@ public class BottomCommand extends TpCommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "Teleports player to the lowest block directly below them";
+        return "Teleports player to the lowest block directly below";
     }
-
+/*
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
         Minecraft mc = Minecraft.getMinecraft();
@@ -28,6 +28,8 @@ public class BottomCommand extends TpCommandBase {
         }
         runCommand(args, player, world, sender);
     }
+
+ */
 
     @Override
     public void runCommand(String[] args, EntityPlayerSP player, World world, ICommandSender sender) throws CommandException {

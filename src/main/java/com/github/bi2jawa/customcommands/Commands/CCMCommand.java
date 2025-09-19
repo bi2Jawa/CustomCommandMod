@@ -8,6 +8,7 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
+import net.minecraftforge.client.ClientCommandHandler;
 
 import java.util.Arrays;
 
@@ -20,7 +21,7 @@ public class CCMCommand extends CustomCommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "Returns all the usages of commands in the Custom Command Mod";
+        return "Returns all the usages of commands in the Mod";
     }
 
     @Override
@@ -38,8 +39,14 @@ public class CCMCommand extends CustomCommandBase {
                 if (commandName.equals(args[0])) {
                     String[] newArgs = Arrays.copyOfRange(args, 1, args.length);
                     if (command.toggle != command.toggleCheck(newArgs)) {
-                        //player.addChatMessage(new ChatComponentText("§aCommand /" + command.getCommandName() + " has been toggled"));
-                        command.processCommand(sender, newArgs);
+                        player.addChatMessage(new ChatComponentText("§aCommand /" + command.getCommandName() + " has been toggled"));
+                        //command.processCommand(sender, newArgs);
+                        //command.toggleCheck(newArgs);
+                        if (command.toggle) {
+                            new CustomCommandMod().registerCommand(command);
+                            return;
+                        }
+                        ClientCommandHandler.instance.getCommands().remove(command.getCommandName());
                         return;
                     }
                     command.runCommand(newArgs, player, world, sender);
@@ -68,15 +75,16 @@ public class CCMCommand extends CustomCommandBase {
 
     public void help(ICommandSender sender) {
 
+        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("§aCommands: "));
         for (CustomCommandBase command : CustomCommandMod.commands) {
             Minecraft mc = Minecraft.getMinecraft();
             EntityPlayerSP player = mc.thePlayer;
             String message;
             if (command.toggle) {
-                message = "§2";
+                message = "§a";
             }
             else {
-                message = "§4";
+                message = "§c";
             }
             message = (message + "/");
             if (!command.getCommandName().equals("ccm")) {
@@ -84,6 +92,9 @@ public class CCMCommand extends CustomCommandBase {
             }
             message = (message +  command.getCommandName());
             message = message + ": §f" + command.getCommandUsage(sender);
+            if (command.getCommandUsage(sender).isEmpty()){
+                return;
+            }
             player.addChatMessage(new ChatComponentText(message));
         }
     }

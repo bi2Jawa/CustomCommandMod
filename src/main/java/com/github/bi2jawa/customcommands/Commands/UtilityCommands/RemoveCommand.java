@@ -9,10 +9,12 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraftforge.client.ClientCommandHandler;
 
+import java.util.Objects;
+
 public class RemoveCommand extends CustomCommandBase {
     @Override
     public String getCommandName() {
-        return "remove";
+        return "delete";
     }
 
     @Override
@@ -22,6 +24,8 @@ public class RemoveCommand extends CustomCommandBase {
             return;
         }
         Config.config.getCategory("customcommand").remove(args[0]);
+        if (!Objects.equals(args[0], "customcommand"))
+            Config.config.getCategory(args[0]).clear();
         Config.config.save();
         ClientCommandHandler.instance.getCommands().remove(args[0]);
     }
