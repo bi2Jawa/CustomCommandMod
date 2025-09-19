@@ -8,7 +8,6 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraftforge.client.ClientCommandHandler;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 import java.util.Objects;
 

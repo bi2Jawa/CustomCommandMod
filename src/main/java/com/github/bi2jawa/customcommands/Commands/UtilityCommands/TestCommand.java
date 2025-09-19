@@ -1,12 +1,9 @@
 package com.github.bi2jawa.customcommands.Commands.UtilityCommands;
 
-import com.github.bi2jawa.customcommands.Commands.CommandAddons.CommandChecker;
 import com.github.bi2jawa.customcommands.Commands.CommandBases.CustomCommandBase;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.world.World;
-import net.minecraftforge.client.ClientCommandHandler;
 
 public class TestCommand extends CustomCommandBase {
     @Override

@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import java.util.ArrayList;
 import java.util.Objects;
 
-@Mod(modid = "Custom Commands Mod", version = "0.1.3", useMetadata = true)
+@Mod(modid = "Custom Commands Mod", version = "0.2.0", useMetadata = true)
 public class CustomCommandMod {
     public static ArrayList<TpCommandBase> tpCommands = new ArrayList<>();
     public static ArrayList<CustomCommandBase> commands = new ArrayList<>();
