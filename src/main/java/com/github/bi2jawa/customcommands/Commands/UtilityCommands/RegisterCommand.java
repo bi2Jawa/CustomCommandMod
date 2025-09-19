@@ -18,9 +18,14 @@ public class RegisterCommand extends CustomCommandBase {
     }
 
     @Override
+    public String getCommandUsage(ICommandSender sender) {
+        return "creates a new command that runs whatever command entered: e.g. /create vis /visibility runs /visibility when using /vis";
+    }
+
+    @Override
     public void runCommand(String[] args, EntityPlayerSP player, World world, ICommandSender sender) throws CommandException {
         if (args.length < 2) {
-            player.addChatMessage(new ChatComponentText("use the format: /register newCommand output (use /output if its meant to be a command)"));
+            player.addChatMessage(new ChatComponentText("use the format: /create newCommand output (use /output if its meant to be a command)"));
             return;
         }
         String command = args[0];

@@ -8,6 +8,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 import java.util.Objects;
 
@@ -18,9 +19,18 @@ public class RemoveCommand extends CustomCommandBase {
     }
 
     @Override
+    public String getCommandUsage(ICommandSender sender) {
+        return "Deletes user made commands made using /create";
+    }
+
+    @Override
     public void runCommand(String[] args, EntityPlayerSP player, World world, ICommandSender sender) throws CommandException {
-        if (args[0].isEmpty()){
+        if (args.length == 0){
             player.addChatMessage(new ChatComponentText("please add a command to remove"));
+            return;
+        }
+        if (!Config.config.getCategory("customcommand").containsKey(args[0])){
+            player.addChatMessage(new ChatComponentText("this is not a user made command"));
             return;
         }
         Config.config.getCategory("customcommand").remove(args[0]);

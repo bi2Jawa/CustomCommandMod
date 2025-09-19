@@ -11,9 +11,15 @@ import net.minecraftforge.client.ClientCommandHandler;
 public class TestCommand extends CustomCommandBase {
     @Override
     public String getCommandName() {
-        return "test";
+        return "exec";
     }
 
+    @Override
+    public String getCommandUsage(ICommandSender sender) {
+        return "Allows the user to bypass any commands on their client to send a command to the server: e.g. /exec top runs the server command /top even if they have a client command /top";
+    }
+
+    /*
     @Override
     public void processCommand(ICommandSender sender, String[] args) {
         if (args.length < 1) {
@@ -32,7 +38,14 @@ public class TestCommand extends CustomCommandBase {
         player.sendChatMessage(command);
     }
 
+     */
+
     @Override
     public void runCommand(String[] args, EntityPlayerSP player, World world, ICommandSender sender) {
+        String message = "/";
+        for (String arg: args){
+            message += arg + " ";
+        }
+        player.sendChatMessage(message);
     }
 }
