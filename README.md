@@ -1,43 +1,28 @@
-# Architectury Loom based template for 1.8.9 forge mods
+# Custom Command Mod
+## Teleport Commands:
 
-**For other templates, do check out the [other branches of this repository](https://github.com/romangraef/Forge1.8.9Template/branches/all)**
+-/top, teleports the player to the highest block above them
 
-## Usage
+-/bottom, teleports player onto the lowest standable block below them
 
-Check out https://moddev.nea.moe/ for a full tutorial on legacy modding.
+-/down, teleports the player onto the next standable block below them or down a specified number of blocks
 
-Alternatively, read here for a basic overview on how to use this repository.
+-/up teleports the player onto the next standable block above them or up a specified number of blocks
 
-To get started, [Use this template](https://github.com/new?template_name=Forge1.8.9Template&template_owner=nea89o).
+-/through (/thru) teleports the player through the current wall they are facing
 
-> [!WARNING]
-> Do not Fork or Clone or Download ZIP this template. If you "use" this template a custom mod id will be generated. You can do that manually using the `make-my-own` script, if you are on linux. If not, just click the use this template button. If you want to use kotlin or make a 1.12 mod check the "Include all branches" and change the default branch in https://github.com/yourname/yourreponame/branches
+## Utility Commands:
 
-This project uses [DevAuth](https://github.com/DJtheRedstoner/DevAuth) per default, so you can log in using your real
-minecraft account. If you don't need that, you can remove it from the buildscript.
+-/find, shows the player all the custom commands in a house. Run /find true in a house without any custom commands to set it up
 
-To run the mod you will need two JDKs, one Java 17 jdk and one Java 1.8 jdk. You can download those
-from [here](https://adoptium.net/temurin/releases) (or use your own downloads).
+-/create, creates a custom command to run whatever command is specified: usage /create vis /visibility 0. Then you can run /vis to output the command /visibility 0
 
-When you import your project into IntelliJ, you need to set the gradle jvm to the Java 17 JDK in the gradle tab, and the
-Project SDK to the Java 1.8 JDK. Then click on the sync button in IntelliJ, and it should create a run task
-called `Minecraft Client`. If it doesn't then try relaunching your IntelliJ. **Warning for Mac users**: You might have to remove the `-XStartOnFirstThread` vm argument from your run configuration. In the future, that should be handled by the plugin, but for now you'll probably have to do that manually.
+-/delete, deletes the custom command specified by the user: /delete vis, deletes the command /vis which was created using /create
 
-To export your project, run the `gradle build` task, and give other people the
-file `build/libs/<modid>-<version>.jar`. Ignore the jars in the `build/badjars` folder. Those are intermediary jars that
-are used by the build system but *do not work* in a normal forge installation.
+-/(command name) toggle, toggles whether the /ccm prefix is required to use the input command: /toggle up, now when running /up nothing happens but you can still use the command with /ccm up
 
-If you don't want mixins (which allow for modifying vanilla code), then you can remove the references to mixins from
-the `build.gradle.kts` at the lines specified with comments and the `com.example.mixin` package.
+-/exec (command name), allows the player to use a server command even if they have a client command that would usually stop them from using it: /exec top, makes the player say "/top" without the client trying to run the /top command
 
-If you don't want access transformers (which allow for making methods public/non-final) you can delete the
-`accesstransformer.cfg` file. If you make a change to the `accesstransformers.cfg` you might need to rebuild your
-project using `./gradlew build --refresh-dependencies`.
+-/config, shows all the custom commands currently created by the player
 
-### For those who have not an attention span
-
-[![Youtube Tutorial](https://i.ytimg.com/vi/nWzHlomdCgc/maxresdefault.jpg)](https://www.youtube.com/watch?v=nWzHlomdCgc)
-
-## Licensing
-
-This template is licensed under the Unlicense (license copy present in this repository), or alternatively under [Creative Commons 1.0 Universal (CC0 1.0)](https://creativecommons.org/publicdomain/zero/1.0/), and all contributions and PR to this template are expected to follow this. This means your mod, based on this template can be licensed whatever way you want, and does not need to reference back to this template in any way.
+-/ccm, shows all the commands available in the mod, not including player made commands
